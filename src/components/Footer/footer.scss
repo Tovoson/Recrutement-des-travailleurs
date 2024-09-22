@@ -1,0 +1,37 @@
+.f-wrapper{
+    background-color: #333333; /* gris foncé */
+    color: #ffffff;
+
+    .f-container{
+        display: flex;
+        padding: 1rem;
+        justify-content: space-between;
+
+        .contact{
+            display: flex;
+            justify-content: center;
+            flex-direction: column; 
+        }
+        .img-lien{
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           gap: 1rem;
+           span{
+            font-size: 12px;
+           }
+
+           .img-log{
+            display: flex;
+            width: 100px;
+            gap: 0.5rem;
+
+            img{
+                width: 20px;
+                cursor: pointer;
+            }
+           }
+        }
+    }
+
+}
