@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import {
   createBrowserRouter,
-  Outlet,
   RouterProvider,
 } from "react-router-dom";
 import './App.scss'
@@ -9,6 +8,8 @@ import Accueil from './components/accueil/Accueil'
 import Logins from './components/login/Login';
 import Ajout from './components/ajout/Ajout';
 import Layout from './components/layout/Layout';
+import Accueil_admin from './components/affichage_mode_admin/Accueil_admin';
+import Archive_page from './components/archive/Archive_page';
 
 function App() {
   const router = createBrowserRouter([
@@ -19,6 +20,10 @@ function App() {
         {
           path:"/",
           element: <Accueil/>
+        },
+        {
+          path:"/admin",
+          element: <Accueil_admin/>
         },
         {
           path:"/ajout",
@@ -38,6 +43,10 @@ function App() {
     {
       path: "/login",
       element: <Logins/>,
+    },
+    {
+      path: "/archive",
+      element: <Archive_page/>,
     },
   ]);
 

@@ -1,7 +1,14 @@
+body{
+    height: 100%;
+}
+
 .App{
     display: flex;
     justify-content: center;
     .container{
         width: 1024px;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
 } 

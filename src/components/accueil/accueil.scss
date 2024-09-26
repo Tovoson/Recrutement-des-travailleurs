@@ -1,3 +1,10 @@
 .a-wrapper{
-    height: 100vh;
+    flex: 1;
+
+    .a-container{
+        span{
+            font-size: 12px;
+            margin-right: 2rem;
+        }
+    }
 }

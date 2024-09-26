@@ -11,9 +11,7 @@ const Accueil = () => {
                         <div key={item.id}>
                             <h1> {item.titre}</h1>
                             <p> {item.description}</p>
-                            <span> {item.date_publication}</span>
-
-
+                            <span className='flexEnd secondaryText'> {item.date_publication}</span>
                         </div>
                     ))
                 }

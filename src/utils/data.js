@@ -2,7 +2,7 @@ const data = [
     {
         id : 1,
         titre : "Génie logiciel",
-        description : "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum voluptate in culpa quisquam eligendi error iure reiciendis quidem animi, laborum saepe dolor dignissimos assumenda unde dicta hic quam incidunt labore.",
+        description : "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum voluptate in culpa quisquam eligendi error iure reiciendis quidem animi, laborum saepe dolor dignissimos assumenda unde dicta hic quam incidunt labore. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum voluptate in culpa quisquam eligendi error iure reiciendis quidem animi, laborum saepe dolor dignissimos assumenda unde dicta hic quam incidunt labore. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum voluptate in culpa quisquam eligendi error iure reiciendis quidem animi, laborum saepe dolor dignissimos assumenda unde dicta hic quam incidunt labore. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum voluptate in culpa quisquam eligendi error iure reiciendis quidem animi, laborum saepe dolor dignissimos assumenda unde dicta hic quam incidunt labore.",
         date_publication : "2pm"
     },
     {
@@ -24,6 +24,7 @@ const data = [
         date_publication : "2pm"
     },
     {
+        
         id : 5,
         titre : "Assistan social",
         description : "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum voluptate in culpa quisquam eligendi error iure reiciendis quidem animi, laborum saepe dolor dignissimos assumenda unde dicta hic quam incidunt labore.",
