@@ -1,17 +1,18 @@
-import { useState } from 'react'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import './App.scss'
-import Accueil from './components/accueil/Accueil'
+import Public from './components/accueil/Accueil'
 import Logins from './components/login/Login';
 import Ajout from './components/ajout/Ajout';
 import Layout from './components/layout/Layout';
 import Accueil_admin from './components/affichage_mode_admin/Accueil_admin';
 import Archive_page from './components/archive/Archive_page';
+import Register from './components/login/Register';
 
 function App() {
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -19,7 +20,7 @@ function App() {
       children: [
         {
           path:"/",
-          element: <Accueil/>
+          element: <Public/>
         },
         {
           path:"/admin",
@@ -29,12 +30,7 @@ function App() {
           path:"/ajout",
           element: <Ajout/>
         },
-
       ]
-    },
-    {
-      path: "/login",
-      element: <Logins/>,
     },
     {
       path: "/ajout",
@@ -43,6 +39,10 @@ function App() {
     {
       path: "/login",
       element: <Logins/>,
+    },
+    {
+      path: "/register",
+      element: <Register/>,
     },
     {
       path: "/archive",

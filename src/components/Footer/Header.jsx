@@ -2,10 +2,13 @@ import React from 'react'
 import './header.scss'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { useUserStore } from '../../lib/userStore'
+import { auth } from '../../lib/firebase'
 
 const Header = () => {
 
     const [imageIndex, setImageIndex] = useState((0));
+    const {currentUser} = useUserStore();
 
 
     const images = [
@@ -42,6 +45,9 @@ const Header = () => {
                 </div>
                 <div className="links">
                     <Link className="link" to="./login">Admin</Link>
+                    { currentUser ? <Link className="link" to="./">
+                    <button onClick={() =>auth.signOut()}>Log out</button>
+                    </Link> : ""}
                 </div>
             </div>
         </div>

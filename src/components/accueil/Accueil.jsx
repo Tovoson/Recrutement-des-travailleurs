@@ -2,7 +2,7 @@ import React from 'react'
 import './accueil.scss'
 import data from '../../utils/data'
 
-const Accueil = () => {
+const Public = () => {
     return (
         <div className="a-wrapper">
             <div className="a-container">
@@ -20,4 +20,4 @@ const Accueil = () => {
     )
 }
 
-export default Accueil
+export default Public
