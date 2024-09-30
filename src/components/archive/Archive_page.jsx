@@ -1,54 +1,69 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './archive.scss'
-import archivesData from '../../utils/dataArray'
 import ArchiveList from './ArchiveListe';
 import ArchiveSearch from './ArchiveRecherche';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import { useUserStore } from '../../lib/userStore';
+import { useNavigate } from 'react-router-dom';
 
 function Archive() {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [currentItems, setCurrentItems] = useState(archivesData.slice(0, 5));
-    const [hasMore, setHasMore] = useState(true);
+    const [loadPost, setLoadPost] = useState([]);
+    const {currentUser} = useUserStore();
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
-     // Charger plus d'éléments quand on atteint le bas de la page
-    const fetchMoreData = () => {
-        if (currentItems.length >= archivesData.length) {
-        setHasMore(false); // Stopper quand il n'y a plus d'éléments
-        return;
-        }
-
-        // Ajouter 10 éléments de plus
-        setTimeout(() => {
-            setCurrentItems(currentItems.concat(archivesData.slice(currentItems.length, currentItems.length + 10)));
-        }, 2000); // Petite pause pour simuler le chargement
+    if (!currentUser) {
+        navigate('../login');
     }
 
-    const handleSearch = (e) => {
-        const term = e.target.value.toLowerCase();
-        setSearchTerm(term);
-        const searchedArchives = archivesData.filter(item =>
-          item.title.toLowerCase().includes(term) || item.description.toLowerCase().includes(term)
-        );
-        setFilteredArchives(searchedArchives);
-      };
+    useEffect(() => {
+
+        if (!currentUser) {
+          navigate('../login')
+          return;
+        }
+  
+          const recupererPubArchive = async () => {
+            const isArchive = true
+            try {
+              
+              const posts = recuperationDonnees(isArchive, currentUser.id);
+              setLoadPost(posts);
+  
+            } catch (error) {
+              console.log("Erreur lors de la récupération des publications archivées: ", error);
+            } finally {
+              setLoading(false);
+            }
+          };
+      
+          if (currentUser) {
+            recupererPubArchive();
+          }
+  
+        }, [currentUser]);
+  
+        if (loading) {
+          return <div>Chargement...</div>;
+        }
 
     return (
         <div className="archive-page">
-            <h1>Archives</h1>
+          <div className="container">
             
-            {/* Recherche */}
-            <ArchiveSearch onSearch={handleSearch} />
+              <h1>Archives</h1>
+              <div className="form">
+                <ArchiveSearch onSearch={() => {}} />           
+              </div>
+              <div className="cont_vide">
+                { loadPost && loadPost.length > 0 
+                  ? <ArchiveList loadPost={loadPost} />
+                  : (
+                      <h3 className='pub_vide'>Aucune publication disponible</h3>
+                    )
+                }
+              </div>
+          </div>
             
-            {/* Liste des archives avec scroll infini */}
-            <InfiniteScroll
-                dataLength={currentItems.length}
-                next={fetchMoreData}
-                hasMore={hasMore}
-                loader={<h4>Chargement...</h4>}
-                endMessage={<p style={{ textAlign: 'center' }}>C'est tout pour l'instant !</p>}
-            >
-                <ArchiveList archives={currentItems} />
-            </InfiniteScroll>
         </div>
     )
 }

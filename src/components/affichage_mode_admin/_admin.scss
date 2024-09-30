@@ -1,5 +1,6 @@
 .ad-wrapper{
     flex: 1;
+    margin-top: 2rem;
 
     .ad-container{
         span{
@@ -7,42 +8,30 @@
             margin-right: 2rem;
         }
 
-        .button_add{
+        .container_button{
+            display: flex;
+            justify-content: space-between;
+            
             margin: 1rem;
+            margin-bottom: 3rem;
             .but_1{
                 background-color: #4681f4;
                 color: white;
             }
         }
 
-        .conteneur{
-            border: 1px solid #E0E0E0;
-            border-radius: 5px;
-            padding: 10px;
-            margin-bottom: 2rem;
+        .cont_vide{
+            display: flex;
+            justify-content: center;
 
-            .but_cont{
+            .pub_vide{
                 display: flex;
-                flex-direction: row;
                 justify-content: center;
-                gap: 2rem;
-
-                button{
-                    padding: 10px;
-                    border: 1px solid rgba(0, 0, 0, 0.2);
-                }
-
-                :nth-child(1){
-                    
-                    background-color: #fff;
-                    
-                }
-                :nth-child(2){
-                    background-color: #ED0800;
-                }
-                :nth-child(3){
-                    background-color: #cf3f7b;
-                }
+                background-color:  #E0E0E0;
+                padding: 2rem;
+                // width: 500px;
+                color: rgb(31, 30, 30);
+                font-size: 13px;
             }
         }
 

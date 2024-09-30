@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import './_admin.scss'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faAdd} from '@fortawesome/free-solid-svg-icons';
 import { useUserStore } from '../../lib/userStore';
-import { auth, db } from '../../lib/firebase';
+import { db } from '../../lib/firebase';
 import Affichage from './Affichage';
-import { collection, query, orderBy, limit, getDocs, where } from 'firebase/firestore';
+import { collection, query, orderBy,getDocs, where } from 'firebase/firestore';
+import LogoutButton from '../btn/BtnLogOut';
 
 
 const Accueil_admin = () => {
     const {currentUser} = useUserStore();
-    const [latestPost, setLatestPost] = useState(null);
+    const [latestPost, setLatestPost] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate()
 
     useEffect(() => {
 
-        if (!currentUser) {
-            setLoading(false); // Si l'utilisateur n'est pas connecté, sortir
-            return;
-        }
+      if (!currentUser) {
+        navigate('../login')
+        return;
+      }
 
         const recupererDernierePublication = async () => {
           try {
@@ -28,46 +30,58 @@ const Accueil_admin = () => {
                 collection(db, "publications"),
                 where("isArchive", "==", false),// Filtrer pour ne pas inclure les publications archivées
                 where("id_user", "==", currentUser.id),
-                orderBy("date_publication", "desc"), 
-                limit(1)
+                orderBy("datePublication", "desc"),
+                // limit(2)
             );
     
             const querySnapshot = await getDocs(q);
     
-            if (!querySnapshot.empty) {
-              // Récupère la première publication dans le snapshot
-              const publication = querySnapshot.docs[0].data();
-              setLatestPost(publication); // Met à jour l'état avec la dernière publication
-            }
+            const posts = querySnapshot.docs.map(doc => ({
+              id_publication: doc.id,
+              ...doc.data(),
+          }));
+
+          setLatestPost(posts);
+
           } catch (error) {
             console.log("Erreur lors de la récupération de la dernière publication : ", error);
           } finally {
             setLoading(false);
-          }
+          } 
         };
     
         if (currentUser) {
             recupererDernierePublication();
         }
-      }, [currentUser]);
 
-      if (loading) {
-        return <div>Chargement...</div>;
-      }
-    //   console.log("Dernier publication "+latestPost)
+    }, [currentUser]);
+
+    if (loading) {
+      return <div>Chargement...</div>;
+    }
 
     return (
         <div className="ad-wrapper">
             <div className="ad-container">
-                <div className="button_add">
+                <div className="container_button">
                     <Link className = "" to = "../ajout">
                         <button className="but_1">
-                            <FontAwesomeIcon icon={faAdd} className='bt_archive'/> Nouveau publication
+                            <FontAwesomeIcon icon={faAdd} className='bt_archive'/> Nouvelle publication
                         </button>
-                    </Link>
-                    <button onClick={() =>auth.signOut()}>Log out</button>
+                    </Link> 
+                    <Link className = "" to = "../archive">
+                        archive
+                    </Link> 
+                  
+                  <LogoutButton/>
                 </div>
-                {latestPost ? <Affichage latestPost = {latestPost}/> : "Aucune publication disponible"}
+              {latestPost && latestPost.length > 0 ? (
+                    <Affichage latestPost={latestPost} />
+                ) : (
+                  <div className="cont_vide">
+                    <h3 className='pub_vide'>Aucune publication disponible</h3>
+                  </div>
+              )}
             </div>
         </div>
     )

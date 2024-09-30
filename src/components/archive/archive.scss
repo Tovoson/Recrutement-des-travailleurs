@@ -1,5 +1,38 @@
 .archive-page {
-    padding: 20px;
+    display: flex;
+
+    .container{
+      display: flex;
+      
+        h1{
+          
+        }
+
+        .form{
+          
+        }
+
+        .component{
+          
+        }
+        
+      }
+
+      .cont_vide{
+        display: flex;
+        justify-content: center;
+        .pub_vide{
+            display: flex;
+            justify-content: center;
+            background-color:  #E0E0E0;
+            padding: 2rem;
+            // width: 500px;
+            color: #1f1e1e;
+            font-size: 13px;
+        }
+    }
+    
+
   }
   
   .archive-list {

@@ -8,8 +8,10 @@
 
         .title{
             flex: 1;
-
+            width: 100%;
+            
             input{
+                width: 100%;
                 padding: 10px;
                 border: 1px solid rgba(0, 0, 0, 0.2);
             }
@@ -17,17 +19,15 @@
 
         .content{
             height: 300px;
-            // overflow-y: auto;
-            // flex: 2;
-            padding-bottom: 2rem;
-
+            flex: 3;
+            
             .editeur{
-
                 height: 100%;
                 border: none;
             }
         }
         .button{
+            flex: 1;
             button{
                 font-size: 12px;
                 color: white;

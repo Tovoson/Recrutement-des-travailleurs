@@ -3,37 +3,42 @@ import './ajout.scss'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { db } from '../../lib/firebase';
 import { useUserStore } from '../../lib/userStore';
 import { doc, setDoc, collection } from 'firebase/firestore';
-import dayjs from 'dayjs'; // Import dayjs
-import relativeTime from 'dayjs/plugin/relativeTime'; // Import du plugin relative time
-import 'dayjs/locale/fr';
+import moment from 'moment/moment';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { modifierPublication } from '../../lib/fonction';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-    dayjs.extend(relativeTime);
-    dayjs.locale('fr');
 
 const Ajout = () => {
     const [value, setValue] = useState('');
     const [title, setTitle] = useState('');
     const [loading, setLoading] = useState(false); // Pour gérer l'état de chargement
-    const [error, setError] = useState(null);
     const {currentUser} = useUserStore();
     const [datePublication, setDatePublication] = useState(null);
+    const navigate = useNavigate()
+    const { state } = useLocation(); // Récupère les données passées via la navigation
     
+    const id_publication = state?.id_publication || null;
+    const titreActuel = state?.titreActuel || '';
+    const descriptionActuelle = state?.descriptionActuelle || '';
 
+    const [nouveauTitre, setNouveauTitre] = useState(titreActuel);
+    const [newDescription, setNewDescription] = useState(descriptionActuelle);
 
     const handleSubmit = async (e) =>{
+
         e.preventDefault()
 
         if (!title || !value) {
-            setError("Le titre et la description ne peuvent pas être vides.");
             return;
         }
 
         setLoading(true);
-        setError(null);
 
         const id_user = currentUser.id; // Obtenir l'ID de l'utilisateur connecté
         const datePublication = new Date();
@@ -43,47 +48,57 @@ const Ajout = () => {
             const docRef = doc(collection(db, "publications"));
 
             await setDoc(docRef, {
-                id_user: currentUser.id, // Utilise l'ID de l'utilisateur
+                id_user: id_user, // Utilise l'ID de l'utilisateur
                 titre: title,
                 description: value,
-                datePublication: new Date(),
+                datePublication: moment(Date().now).format("YYYY-MM-DD HH:mm:ss"),
                 isArchive : false,
               });
 
-            console.log(title)
-            console.log(value)
-            console.log(datePublication)
-            console.log("idUser : "+ id_user)
-
             setDatePublication(datePublication);
-
-            // Réinitialiser les champs après l'ajout
+            toast.success("Publication réussie !");
             setTitle('');
             setValue('');
-            console.log("Publication ajoutée avec succès !");
+            navigate('/admin')
+
 
         } catch (error) {
             console.error("Erreur lors de l'ajout de la publication : ", error);
-            setError("Une erreur est survenue. Veuillez réessayer.");
         }finally{
             setLoading(false);
         }
     }
 
+    const handleModification = (e) =>{
+        e.preventDefault()
+        setLoading(true);
+        modifierPublication(id_publication, nouveauTitre, newDescription);
+        toast.success("Modification réussie !");
+
+        setTimeout(() => {
+            navigate('../admin');
+        }, 2000);
+        
+    }
+
     return (
         <div className="a-wrapper">
             <div className="a-container">
+                {currentUser.username}
+                <ToastContainer position="top-right" autoClose={2000}/>
                 <div className="title">
-                    <input type="text" placeholder='Titre' value={title} onChange={(e) => setTitle(e.target.value)}/>
+                    <input type="text" placeholder='Titre' value={ nouveauTitre ? nouveauTitre : title} onChange={ id_publication ? (e) => setNouveauTitre(e.target.value) : (e) => setTitle(e.target.value)}/>
                 </div>
                 <div className="content">
-                    <ReactQuill className='editeur' theme="snow" value={value} onChange={setValue} />
+                    <ReactQuill className='editeur' theme="snow" value={ nouveauTitre ? newDescription : value} onChange={ id_publication ? setNewDescription : setValue} />
                 </div>
                 <div className="button">
-                    <button onClick={handleSubmit} disabled={loading} >
-                        <FontAwesomeIcon icon={faPaperPlane} />
+                    <button onClick={ id_publication ? handleModification : handleSubmit} disabled={loading} >
+                        <FontAwesomeIcon icon={ nouveauTitre ? faEdit : faPaperPlane} />
                         <span>
-                        {loading ? "Publication..." : "Publier"}
+                        {nouveauTitre 
+                            ? (loading ? "Modification..." : "Modifier")
+                            : (loading ? "Publication..." : "Publier")}
                         </span>
                     </button>
                 </div>

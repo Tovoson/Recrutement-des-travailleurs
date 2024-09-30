@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './login.scss'
-import { Link, useNavigate } from 'react-router-dom'
 import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../lib/firebase'
-import { doc, setDoc } from "firebase/firestore"; 
 import { useUserStore } from '../../lib/userStore';
 import Form from './Form';
 import Accueil_admin from '../affichage_mode_admin/Accueil_admin';
@@ -11,9 +9,7 @@ import Accueil_admin from '../affichage_mode_admin/Accueil_admin';
 const Logins = () => {
     const [loading, setLoading] = useState(false);
     const {currentUser, isLoading, fetchUserInfo} = useUserStore();
-    // const navigate = useNavigate()
-    // const user = false
-
+    
     useEffect(() =>{
         const unSub = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -30,13 +26,6 @@ const Logins = () => {
         }
 
     }, [fetchUserInfo]);
-
-    // useEffect(() => {
-    //     if (currentUser) {
-    //         console.log('Redirection vers /admin');
-    //         navigate('/admin');
-    //     }
-    // }, [currentUser, navigate]);
 
     const handleLogin = async (e) =>{
         e.preventDefault();
@@ -64,12 +53,7 @@ const Logins = () => {
     if (isLoading){
         return <div className="loading">Loading...</div>
     } 
-
-    // if (currentUser) {
-    //     return null;
-    // }
-
-
+    
     return (
         <>{ currentUser ? <Accueil_admin/> : <Form handleLogin = {handleLogin} loading={loading}/> }   
        </>
