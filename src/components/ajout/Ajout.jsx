@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './ajout.scss'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -29,6 +29,15 @@ const Ajout = () => {
 
     const [nouveauTitre, setNouveauTitre] = useState(titreActuel);
     const [newDescription, setNewDescription] = useState(descriptionActuelle);
+
+    useEffect(() => {
+
+        if (!currentUser) {
+          navigate('../login')
+          return;
+        }
+    
+    }, [currentUser]);
 
     const handleSubmit = async (e) =>{
 
@@ -78,13 +87,18 @@ const Ajout = () => {
         setTimeout(() => {
             navigate('../admin');
         }, 2000);
+
+    
         
     }
-
+  
+    if (loading) {
+    return <Loading/>;
+    }
     return (
         <div className="a-wrapper">
             <div className="a-container">
-                {currentUser.username}
+                {}
                 <ToastContainer position="top-right" autoClose={2000}/>
                 <div className="title">
                     <input type="text" placeholder='Titre' value={ nouveauTitre ? nouveauTitre : title} onChange={ id_publication ? (e) => setNouveauTitre(e.target.value) : (e) => setTitle(e.target.value)}/>

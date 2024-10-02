@@ -88,8 +88,3 @@ export const modifierPublication = async (id_publication, newTitle, newDescripti
 
     return posts
   }
-
-
-
-
-  

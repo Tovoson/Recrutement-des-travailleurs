@@ -10,7 +10,7 @@ const Footer = () => {
                     <span className='secondaryText'>Adresse : 123 rue de france</span>
                     <span className='secondaryText'>Téléphone : +2322333</span>
                     <span className='secondaryText'>Email : ...@gmail.com</span>
-                    
+                     
                 </div>
                 <div className="img-lien">
                     <span className='primaryText'>Suivez-nous</span>

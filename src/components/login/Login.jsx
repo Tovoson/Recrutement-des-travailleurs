@@ -4,11 +4,16 @@ import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, db } from '../../lib/firebase'
 import { useUserStore } from '../../lib/userStore';
 import Form from './Form';
-import Accueil_admin from '../affichage_mode_admin/Accueil_admin';
+import { Loading } from '../modale/Loading';
+import { useNavigate } from 'react-router-dom';
+
 
 const Logins = () => {
     const [loading, setLoading] = useState(false);
     const {currentUser, isLoading, fetchUserInfo} = useUserStore();
+    const [isError, setIsError] = useState(false);
+    
+    const navigate = useNavigate()
     
     useEffect(() =>{
         const unSub = onAuthStateChanged(auth, (user) => {
@@ -37,25 +42,30 @@ const Logins = () => {
         
         try {
             
-            const res = await signInWithEmailAndPassword(auth, email, password)
-
+            await signInWithEmailAndPassword(auth, email, password)
             console.log("Logging avec succès")
 
         } catch (error) {
+            setIsError(true)
             console.log(error + "Il y a un erreur");
         }finally{
             setLoading(false);
         }
     }
 
+    setTimeout(() => {
+        setIsError(false);
+    }, 2000);
     console.log(currentUser);
 
     if (isLoading){
-        return <div className="loading">Loading...</div>
+        return <Loading/>
     } 
     
     return (
-        <>{ currentUser ? <Accueil_admin/> : <Form handleLogin = {handleLogin} loading={loading}/> }   
+        <>{ currentUser 
+            ? navigate('../admin')
+            : <Form handleLogin = {handleLogin} loading={loading} isError = {isError}/> }   
        </>
     )
 }

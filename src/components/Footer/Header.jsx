@@ -1,5 +1,4 @@
 import React from 'react'
-import './header.scss'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { useUserStore } from '../../lib/userStore'
@@ -31,7 +30,7 @@ const Header = () => {
         width: '100%',
         height: '200px', // Exemple de hauteur pour le header
         backgroundSize: 'cover',
-        marginTop: '2px',
+        marginTop : '5rem',
         backgroundPosition: 'center',
         backgroundImage: `url(${images[imageIndex]})`, // Image dynamique
         transition: 'background-image 1s ease-in-out' // Transition pour l'effet smooth
@@ -39,17 +38,6 @@ const Header = () => {
 
     return (
         <div className="a-header" style={headerStyle}>
-            <div className="a-container">
-                <div className="circle">
-                    <span>PA</span>
-                </div>
-                <div className="links">
-                    <Link className="link" to="./login">Admin</Link>
-                    { currentUser ? <Link className="link" to="./">
-                    <button onClick={() =>auth.signOut()}>Log out</button>
-                    </Link> : ""}
-                </div>
-            </div>
         </div>
     )
 }

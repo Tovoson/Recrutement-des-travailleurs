@@ -34,6 +34,8 @@ function ArchiveList({loadPost}) {
         toast.success("RePublication avec succès");
     };
 
+    console.log("affichage 2"+ loadPost)
+
     return (
         <div className="archive-list">
             {loadPost .map((post, index) => (

@@ -7,12 +7,23 @@
         flex-direction: column;
         gap: 1rem;
         background-color: var(--lightBlue);
-        
-        h1{
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: teal;
+
+        .titre{
+            display: flex;
+            
+            .back{
+                margin-right: 5rem;
+                align-items: center;
+                
+            }
+
+            h1{
+                font-size: 1.2rem;
+                font-weight: 700;
+                color: teal;
+            }
         }
+        
 
         form{
             display: flex;
@@ -27,6 +38,23 @@
                 padding: 10px;
                 border: none;
                 border-bottom: 1px solid gray;
+            }
+
+            .pass_wd{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 3px;
+                border-bottom: 1px solid gray;
+
+                ._in_psd{
+                    width: 178px;
+                    border-bottom: none;
+                }
+
+                .pswd{
+                    cursor: pointer;
+                }
             }
 
             button{

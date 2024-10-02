@@ -30,12 +30,16 @@ function App() {
           path:"/ajout",
           element: <Ajout/>
         },
+        {
+          path: "/archive",
+          element: <Archive_page/>,
+        },
       ]
     },
-    {
-      path: "/ajout",
-      element: <Ajout/>,
-    },
+    // {
+    //   path: "/ajout",
+    //   element: <Ajout/>,
+    // },
     {
       path: "/login",
       element: <Logins/>,
@@ -44,10 +48,10 @@ function App() {
       path: "/register",
       element: <Register/>,
     },
-    {
-      path: "/archive",
-      element: <Archive_page/>,
-    },
+    // {
+    //   path: "/archive",
+    //   element: <Archive_page/>,
+    // },
   ]);
 
   return (

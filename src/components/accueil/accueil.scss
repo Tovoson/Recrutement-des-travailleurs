@@ -1,10 +1,29 @@
-.a-wrapper{
-    flex: 1;
+.p-wrapper{
+    flex: 2;
 
-    .a-container{
+    .p-container{
+        display: flex;
+        min-height: 300px;
+        align-items: start;
+        flex-direction: column;
+        padding: 1rem;
+        // justify-content: center;
+
+        .titre{
+            font-size: 2rem;
+            margin: 1rem;
+            color: #4e73b7;
+
+        }
+
+        p{
+           line-height: 30px;
+           margin-left: 1rem;
+        }
+
         span{
             font-size: 12px;
-            margin-right: 2rem;
+            
         }
     }
 }

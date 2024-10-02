@@ -38,4 +38,33 @@
     background-color: gray;
     color: white;
   }
+
+  .loading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 6rem;
+    font-size: 1.5rem;
+    color: rgb(5, 5, 5);
+    border-radius: 5px;
+    display: inline-block;
+    width: 100%;
+
+    .points {
+      display: inline-block;
+    }
+
+    @keyframes dotsAnimation {
+      0% { content: ""; }
+      33% { content: "."; }
+      66% { content: ".."; }
+      100% { content: "..."; }
+    }
+
+    .points::after {
+      content: "...";
+      animation: dotsAnimation 1s steps(3, end) infinite;
+    }
+  }
   

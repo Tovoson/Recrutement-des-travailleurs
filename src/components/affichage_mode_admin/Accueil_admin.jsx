@@ -8,6 +8,7 @@ import { db } from '../../lib/firebase';
 import Affichage from './Affichage';
 import { collection, query, orderBy,getDocs, where } from 'firebase/firestore';
 import LogoutButton from '../btn/BtnLogOut';
+import { Loading, Pubvide } from '../modale/Loading';
 
 
 const Accueil_admin = () => {
@@ -31,7 +32,6 @@ const Accueil_admin = () => {
                 where("isArchive", "==", false),// Filtrer pour ne pas inclure les publications archivées
                 where("id_user", "==", currentUser.id),
                 orderBy("datePublication", "desc"),
-                // limit(2)
             );
     
             const querySnapshot = await getDocs(q);
@@ -57,30 +57,20 @@ const Accueil_admin = () => {
     }, [currentUser]);
 
     if (loading) {
-      return <div>Chargement...</div>;
+      return <Loading/>;
     }
 
     return (
         <div className="ad-wrapper">
             <div className="ad-container">
                 <div className="container_button">
-                    <Link className = "" to = "../ajout">
-                        <button className="but_1">
-                            <FontAwesomeIcon icon={faAdd} className='bt_archive'/> Nouvelle publication
-                        </button>
-                    </Link> 
-                    <Link className = "" to = "../archive">
-                        archive
-                    </Link> 
-                  
+                   
                   <LogoutButton/>
                 </div>
               {latestPost && latestPost.length > 0 ? (
                     <Affichage latestPost={latestPost} />
                 ) : (
-                  <div className="cont_vide">
-                    <h3 className='pub_vide'>Aucune publication disponible</h3>
-                  </div>
+                  <Pubvide/>
               )}
             </div>
         </div>

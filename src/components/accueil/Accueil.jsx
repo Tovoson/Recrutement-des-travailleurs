@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import './accueil.scss'
-import data from '../../utils/data'
 import { collection, query, orderBy, limit, getDocs, where } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
 import moment from 'moment/moment';
+import { Loading, Pubvide } from '../modale/Loading';
 
 
 const Public = () => {
@@ -12,14 +12,16 @@ const Public = () => {
 
     useEffect(() => {
   
+
           const recupererDernierePublication = async () => {
             try {
+
+              const isArch = false;
               // Requête Firestore pour récupérer la dernière publication non archivée
               const q = query(
                   collection(db, "publications"),
                   where("isArchive", "==", false),// Filtrer pour ne pas inclure les publications archivées
                   orderBy("datePublication", "desc"),
-                  limit(1)
               );
       
               const querySnapshot = await getDocs(q);
@@ -43,26 +45,27 @@ const Public = () => {
         }, []);
   
         if (loading) {
-          return <div>Chargement...</div>;
+          return <Loading/>;
         }
 
         const post = latestPost[0]; // Récupère le premier élément
 
         if (!post) {
-            return <div>Aucune publication trouvée.</div>;
+            return <Pubvide/>;
         }
 
 
     return (
-        <div className="a-wrapper">
-            <div className="a-container">
-                <div>
-                    <h1> {post.titre}</h1>
-                    <p dangerouslySetInnerHTML={{ __html: post.description }}/>
-                    <span className='flexEnd secondaryText'> Publié {moment(post.date_publication).fromNow()}</span>
-                </div>
+      <>
+        <div className="p-wrapper">
+            <div className="p-container">  
+              <div className='titre'> {post.titre}</div>
+              <p dangerouslySetInnerHTML={{ __html: post.description }}/>
+              <span className='flexEnd secondaryText'> Publié {moment(post.date_publication).fromNow()}</span>
+              
             </div>
         </div>
+      </>
     )
 }
 

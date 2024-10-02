@@ -4,6 +4,8 @@ import ArchiveList from './ArchiveListe';
 import ArchiveSearch from './ArchiveRecherche';
 import { useUserStore } from '../../lib/userStore';
 import { useNavigate } from 'react-router-dom';
+import { Loading, Pubvide } from '../modale/Loading';
+import { recuperationDonnees } from '../../lib/fonction';
 
 function Archive() {
     const [loadPost, setLoadPost] = useState([]);
@@ -26,7 +28,7 @@ function Archive() {
             const isArchive = true
             try {
               
-              const posts = recuperationDonnees(isArchive, currentUser.id);
+              const posts = await recuperationDonnees(isArchive, currentUser.id);
               setLoadPost(posts);
   
             } catch (error) {
@@ -43,8 +45,12 @@ function Archive() {
         }, [currentUser]);
   
         if (loading) {
-          return <div>Chargement...</div>;
+          return <Loading/>;
         }
+
+        console.log(currentUser.id)
+        console.log("lenth :"+loadPost.length)
+        
 
     return (
         <div className="archive-page">
@@ -58,7 +64,10 @@ function Archive() {
                 { loadPost && loadPost.length > 0 
                   ? <ArchiveList loadPost={loadPost} />
                   : (
-                      <h3 className='pub_vide'>Aucune publication disponible</h3>
+                    <>
+                    <Pubvide/>
+                    
+                    </>
                     )
                 }
               </div>
