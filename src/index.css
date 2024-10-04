@@ -21,8 +21,21 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+p{
+  line-height: 30px;
+  margin-left: 1rem;
+}
+
 .paddings {
   padding: 1.5rem;
+}
+
+.titre{
+  font-size: 2rem;
+  margin: 1rem;
+  color: #4e73b7;
+
 }
 
 .innerWidth {

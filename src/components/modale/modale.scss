@@ -67,4 +67,24 @@
       animation: dotsAnimation 1s steps(3, end) infinite;
     }
   }
+.content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .vide{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #e0e0e0;
+    margin-top: 9rem;
+    padding: 1rem;
+    border-radius: 5px;
+
+    p{
+      font-size: 1rem;
+    }
+  }
+}
   

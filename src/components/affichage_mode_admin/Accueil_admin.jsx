@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import './_admin.scss'
 import { Link, useNavigate } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faAdd} from '@fortawesome/free-solid-svg-icons';
 import { useUserStore } from '../../lib/userStore';
 import { db } from '../../lib/firebase';
 import Affichage from './Affichage';
+
 import { collection, query, orderBy,getDocs, where } from 'firebase/firestore';
 import LogoutButton from '../btn/BtnLogOut';
 import { Loading, Pubvide } from '../modale/Loading';
+import data from '../../utils/data';
 
 
 const Accueil_admin = () => {
@@ -16,7 +16,6 @@ const Accueil_admin = () => {
     const [latestPost, setLatestPost] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate()
-
     useEffect(() => {
 
       if (!currentUser) {
@@ -41,7 +40,8 @@ const Accueil_admin = () => {
               ...doc.data(),
           }));
 
-          setLatestPost(posts);
+          // à decommencter s'il y a un connexion
+           setLatestPost(posts);
 
           } catch (error) {
             console.log("Erreur lors de la récupération de la dernière publication : ", error);
@@ -69,9 +69,9 @@ const Accueil_admin = () => {
                 </div>
               {latestPost && latestPost.length > 0 ? (
                     <Affichage latestPost={latestPost} />
-                ) : (
-                  <Pubvide/>
-              )}
+                    ) : (
+                      <Pubvide/>
+                      )}
             </div>
         </div>
     )

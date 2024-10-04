@@ -3,6 +3,7 @@ import './archive.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faUndo } from '@fortawesome/free-solid-svg-icons';
 import Modale from '../modale/Modale';
+import data from "../../utils/data"
 import { toast, ToastContainer } from 'react-toastify';
 import { restorationArchive, supprimerPublication } from '../../lib/fonction';
 
@@ -35,13 +36,14 @@ function ArchiveList({loadPost}) {
     };
 
     console.log("affichage 2"+ loadPost)
+    
 
     return (
         <div className="archive-list">
-            {loadPost .map((post, index) => (
+            {data.map((post, index) => (
                 <div key={index} className="archive-item">
                 <h3>{post.id_publication}</h3>
-                <h3>{post.titre}</h3>
+                <h3 className = "titre">{post.titre}</h3>
                 <p dangerouslySetInnerHTML={{ __html: post.description }}/>
                 <small>Date : {post.datePublication}</small>
                 <div className="actions">

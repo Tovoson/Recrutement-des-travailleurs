@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { archivagePublication, supprimerPublication } from '../../lib/fonction';
 import { toast, ToastContainer } from 'react-toastify';
+import data from '../../utils/data';
 
 
 const Affichage = ({latestPost}) =>{
@@ -51,10 +52,13 @@ const Affichage = ({latestPost}) =>{
 
     return(<>
         
-            {latestPost.map((Post) =>(
-                <div className='conteneur' key={Post.id_publication}>
+            {data.map((Post) =>(
+                // <div className='conteneur' key={Post.id_publication}>
+                <div className='conteneur' key={Post.id}>
                 <ToastContainer position="top-right" autoClose={2000}/>
-                <h2> {Post.titre}</h2>
+                {/* <h2> {Post.titre}</h2> */}
+                <h2 className='titre'> {Post.titre}</h2>
+                {/* <p dangerouslySetInnerHTML={{ __html: Post.description }}/> */}
                 <p dangerouslySetInnerHTML={{ __html: Post.description }}/>
                 <span className='flexEnd secondaryText'> Publié {moment(Post.date_publication).fromNow()}</span>
 

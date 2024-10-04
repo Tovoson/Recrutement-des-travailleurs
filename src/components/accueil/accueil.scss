@@ -1,19 +1,27 @@
 .p-wrapper{
-    flex: 2;
+    display: flex;
+    // flex: 2;
+    .cont{
 
-    .p-container{
         display: flex;
-        min-height: 300px;
-        align-items: start;
         flex-direction: column;
-        padding: 1rem;
-        // justify-content: center;
+        border: 1px solid #e0e0e0;
+        margin: 2rem;
+        min-height: 300px;
+        border-radius: 5px;
+        width: 100%;
 
-        .titre{
-            font-size: 2rem;
-            margin: 1rem;
-            color: #4e73b7;
-
+        .p-container{
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+            
+            .titre{
+                font-size: 2rem;
+                margin: 1rem;
+                color: #4e73b7;
+                
         }
 
         p{
@@ -24,6 +32,7 @@
         span{
             font-size: 12px;
             
+        }
         }
     }
 }

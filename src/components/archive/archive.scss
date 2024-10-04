@@ -1,51 +1,41 @@
 .archive-page {
-    display: flex;
-
+  display: flex;
     .container{
       display: flex;
-      
-        h1{
-          
-        }
-
-        .form{
-          
-        }
-
-        .component{
-          
-        }
+      flex-direction: column;
+      border: 1px solid #e0e0e0;
+      margin: 2rem;
+      min-height: 300px;
+      border-radius: 5px;
         
       }
-
-      .cont_vide{
-        display: flex;
-        justify-content: center;
-        .pub_vide{
-            display: flex;
-            justify-content: center;
-            background-color:  #E0E0E0;
-            padding: 2rem;
-            // width: 500px;
-            color: #1f1e1e;
-            font-size: 13px;
-        }
-    }
-    
 
   }
   
   .archive-list {
     margin-top: 20px;
-  }
-  
-  .archive-item {
-    padding: 10px;
-    border: 1px solid #ddd;
-    margin-bottom: 10px;
-  }
-  
-  .actions button {
-    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    
+    .archive-item {
+      padding: 10px;
+      border: 1px solid #e0e0e0;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      background-color: #e0e0e0;
+    }
+    
+    .actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+
+      button {
+        margin-right: 10px;
+      }
+    }
+    
   }
   

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOutAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { useUserStore } from '../../lib/userStore';
-import { auth } from '../../lib/firebase';
+import LogoutButton from '../btn/BtnLogOut';
 
 const Navbar = () => {
-    const {currentUser} = useUserStore();
+     const {currentUser} = useUserStore();
 
     return (
         <div className="n-wrapper">
@@ -20,8 +20,8 @@ const Navbar = () => {
                     
                     {currentUser ? " ": 
                         (<>
-                            <Link to="./">Accueil</Link> 
-                            <Link to="./login">Mon compte</Link>
+                            {/* <Link to="./">Accueil</Link> 
+                            <Link to="./login">Mon compte</Link> */}
                         </>
                         )
                     }
@@ -44,9 +44,7 @@ const Navbar = () => {
                     <Link to="./archive" className='nav_data'>Liste des archives</Link>
                 </div>
                 <Link className="link" to="./">
-                    <button onClick={() =>auth.signOut()}>
-                        Deconnecter <FontAwesomeIcon icon={faSignOutAlt} className='logo'/>
-                    </button>
+                    <LogoutButton/>
                 </Link>
             </div>)
             : ""

@@ -9,7 +9,8 @@ import { recuperationDonnees } from '../../lib/fonction';
 
 function Archive() {
     const [loadPost, setLoadPost] = useState([]);
-    const {currentUser} = useUserStore();
+    // const {currentUser} = useUserStore();
+    const currentUser = true
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
 
@@ -60,8 +61,8 @@ function Archive() {
               <div className="form">
                 <ArchiveSearch onSearch={() => {}} />           
               </div>
-              <div className="cont_vide">
-                { loadPost && loadPost.length > 0 
+              
+                {/* { loadPost && loadPost.length > 0 
                   ? <ArchiveList loadPost={loadPost} />
                   : (
                     <>
@@ -69,8 +70,9 @@ function Archive() {
                     
                     </>
                     )
-                }
-              </div>
+                } */}
+                <ArchiveList loadPost={loadPost} />
+              
           </div>
             
         </div>

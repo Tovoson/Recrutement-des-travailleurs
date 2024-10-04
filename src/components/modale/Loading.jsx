@@ -13,10 +13,14 @@ export const Loading = () => {
 export const Pubvide = () => {
 
     return (
-        <> 
-           <div className="loading">
-                Contenu vide <br />
+        <> <div className="content">
+
+           <div className="vide">
+                <p>
+                    Contenu vide <br />
+                </p>
             </div>
+        </div>
         </> 
     )
 }

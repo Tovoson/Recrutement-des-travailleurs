@@ -3,6 +3,13 @@
     margin-top: 2rem;
 
     .ad-container{
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        min-height: 300px;
+        margin: 2rem;
+        padding: 1rem;
         span{
             font-size: 12px;
             margin-right: 2rem;
@@ -20,20 +27,6 @@
             }
         }
 
-        .cont_vide{
-            display: flex;
-            justify-content: center;
-
-            .pub_vide{
-                display: flex;
-                justify-content: center;
-                background-color:  #E0E0E0;
-                padding: 2rem;
-                // width: 500px;
-                color: rgb(31, 30, 30);
-                font-size: 13px;
-            }
-        }
-
+        
     }
 }

@@ -12,6 +12,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { modifierPublication } from '../../lib/fonction';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Loading } from '../modale/Loading';
 
 
 const Ajout = () => {
